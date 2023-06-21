@@ -5,9 +5,11 @@ import { useContext, useEffect, useState } from "react";
 import { BsNewspaper, BsSearch } from "react-icons/bs";
 import { FaEllipsisH, FaPowerOff, FaUserSecret } from "react-icons/fa";
 import { AuthContext } from "../../contexts/MainContext";
+import { useNavigate } from "react-router-dom";
 const Explore = () => {
   const [showSearch, setShowSearch] = useState(true);
-  const { userType, setUserType } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
   useEffect(() => {
     if (searchValue !== "") {
@@ -23,20 +25,24 @@ const Explore = () => {
         <div className="fixed top-0 left-0 z-50 bg-[#282c37] w-full  pr-3 py-2">
           <div className="flex justify-between px-1">
             {/* logo below */}
-            <div className="font-Kablam flex space-x-2 ml-2 text-[26px] justify-start">
-              <div className="-rotate-2">Trendy</div>
+            <div className="font-Kablam flex space-x-2 ml-2 text-[26px] justify-start items-end">
+              <div className="-rotate-2">Difny</div>
 
-              <div className="rotate-2"> Blogger</div>
+              <div className="rotate-2 text-[18px]">.Com</div>
             </div>
             {/* md device Login Option */}
             <div className="flex justify-between items-center font-robo text-[11px] py-0">
-              {userType === 1 ? (
+              {user === null ? (
                 <div className="flex space-x-2">
-                  <div className="bg-[#595aff] font-semibold flex hover:bg-opacity-80  justify-center items-center px-2 h-[32px] rounded-md tracking-tighter">
+                  <div
+                    onClick={() => navigate("/register")}
+                    className="bg-[#595aff] font-semibold flex hover:bg-opacity-80  justify-center items-center px-2 h-[32px] rounded-md tracking-tighter"
+                  >
                     Create Account
                   </div>
                   <div
-                    onClick={() => setUserType(2)}
+                    style={{ cursor: "pointer" }}
+                    onClick={() => navigate("/login")}
                     className=" flex justify-center items-center px-2 h-[32px] rounded-md tracking-tighter border-[2px] border-[#8c8dff] text-[#8c8dff] hover:text-white hover:border-[#595aff] hover:bg-[#595aff]"
                   >
                     Login
@@ -45,7 +51,7 @@ const Explore = () => {
               ) : (
                 <div className="flex justify-center  items-center  space-x-4 text-lg">
                   <FaUserSecret className="text-[#8c8dff]">
-                    <button onClick={() => setUserType(1)}></button>
+                    <button></button>
                   </FaUserSecret>
                 </div>
               )}
@@ -138,9 +144,9 @@ const Explore = () => {
               <FaEllipsisH />
               {/* <span>About</span> */}
             </div>
-            {userType === 2 && (
+            {user && (
               <div
-                onClick={() => setUserType(1)}
+                onClick={() => logOut()}
                 className="hover:bg-blue-500 flex justify-center text-white"
                 style={{ cursor: "pointer" }}
               >
