@@ -1,21 +1,33 @@
-// import { useState } from 'react'
-
-import Explore from "./components/Explore/Explore";
-import Search from "./components/Search/Search";
-import SideNav from "./components/SideNav/SideNav";
-
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import DefaultLayout from "./layouts/DefaultLayout";
+import LoginLayout from "./layouts/LoginLayout";
+import RegistrationLayout from "./layouts/RegistrationLayout";
+import PageNotFoundLayout from "./layouts/PageNotFoundLayout";
+import ErrorElement from "./components/ErrorElement/ErrorElement";
 function App() {
-  // const [count, setCount] = useState(0)
-
-  return (
-    <div className="md:pt-5 w-full md:w-[80%] mx-auto">
-      <div className="flex justify-between items-start w-full">
-        <Search></Search>
-        <Explore></Explore>
-        <SideNav></SideNav>
-      </div>
-    </div>
-  );
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <DefaultLayout></DefaultLayout>,
+      errorElement: <ErrorElement></ErrorElement>,
+    },
+    {
+      path: "login",
+      element: <LoginLayout></LoginLayout>,
+      errorElement: <ErrorElement></ErrorElement>,
+    },
+    {
+      path: "register",
+      element: <RegistrationLayout></RegistrationLayout>,
+      errorElement: <ErrorElement></ErrorElement>,
+    },
+    {
+      path: "*",
+      element: <PageNotFoundLayout></PageNotFoundLayout>,
+      errorElement: <ErrorElement></ErrorElement>,
+    },
+  ]);
+  return <RouterProvider router={router}></RouterProvider>;
 }
 
 export default App;
