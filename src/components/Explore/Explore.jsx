@@ -8,7 +8,7 @@ import { AuthContext } from "../../contexts/MainContext";
 import { useNavigate } from "react-router-dom";
 const Explore = () => {
   const [showSearch, setShowSearch] = useState(true);
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut, feedType } = useContext(AuthContext);
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("");
   useEffect(() => {
@@ -35,14 +35,14 @@ const Explore = () => {
               {user === null ? (
                 <div className="flex space-x-2">
                   <div
-                    onClick={() => navigate("/register")}
+                    onClick={() => navigate("/auth/register")}
                     className="bg-[#595aff] font-semibold flex hover:bg-opacity-80  justify-center items-center px-2 h-[32px] rounded-md tracking-tighter"
                   >
                     Create Account
                   </div>
                   <div
                     style={{ cursor: "pointer" }}
-                    onClick={() => navigate("/login")}
+                    onClick={() => navigate("/auth/login")}
                     className=" flex justify-center items-center px-2 h-[32px] rounded-md tracking-tighter border-[2px] border-[#8c8dff] text-[#8c8dff] hover:text-white hover:border-[#595aff] hover:bg-[#595aff]"
                   >
                     Login
@@ -63,10 +63,35 @@ const Explore = () => {
       <div className="flex bg-[#282c37] ">
         {/* bg-[#1f232b] */}
         <div className="w-[86%] md:w-full bg-[#1f232b]">
-          <div className="bg-[#313543] pt-8 md:pt-0">
-            <h1 className="px-5 py-3 text-[22px] font-semibold font-robo flex justify-start items-center">
-              <FiHash /> Explore
-            </h1>
+          <div className="">
+            <div className="bg-[#313543] pt-8 md:pt-0">
+              <h1 className="px-5 py-3 text-[18px] font-semibold font-robo flex justify-start items-center">
+                {feedType === 1 && (
+                  <>
+                    <FiHash /> Explore
+                  </>
+                )}
+                {feedType === 2 && (
+                  <>
+                    <FiHash /> People
+                  </>
+                )}
+                {feedType === 3 && (
+                  <>
+                    <FiHash /> Favourites
+                  </>
+                )}
+                {feedType === 4 && (
+                  <>
+                    <FiHash /> News
+                  </>
+                )}
+              </h1>
+            </div>
+            {/* small device postnav */}
+            <div className="md:hidden block">
+              <PostNav></PostNav>
+            </div>
           </div>
           {/*md device search bar below */}
           <div className="w-[96%]  mx-auto block md:hidden my-2">
@@ -90,8 +115,12 @@ const Explore = () => {
               />
             </label>
           </div>
-          <PostNav></PostNav>
-          <div className="w-full ml-1 mx-auto scroll-container">
+          {/* lg device postnav */}
+          <div className="hidden md:block">
+            <PostNav></PostNav>
+          </div>
+          {/* scroll-container */}
+          <div className="w-full ml-1 mx-auto h-[80vh] overflow-y-scroll">
             <IndividualPost></IndividualPost>
             <IndividualPost></IndividualPost>
             <IndividualPost></IndividualPost>

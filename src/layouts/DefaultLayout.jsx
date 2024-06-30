@@ -7,9 +7,9 @@ import { AuthContext } from "../contexts/MainContext";
 const DefaultLayout = () => {
   const { userType } = useContext(AuthContext);
   return (
-    <div className="md:pt-5 w-full md:w-[80%] mx-auto">
+    <div className="md:pt-5 w-full md:w-[85%] mx-auto">
       {console.log(userType)}
-      <div className="flex justify-between items-start w-full">
+      <div className="flex justify-between items-start w-full ">
         <Search></Search>
         <Explore></Explore>
         <SideNav></SideNav>

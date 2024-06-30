@@ -23,6 +23,12 @@ const MainContext = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // Feed properties below
+  // 1 for explore, 2 for people, 3 for favourites, 4 for News // Default it is set to 1 or explore
+  const [feedType, setFeedType] = useState(1);
+
+  // Search Bar properties below
+
   const [inputSearch, setInputSearch] = useState("");
   const [showSearchResult, setShowSearchResult] = useState(false);
 
@@ -120,6 +126,8 @@ const MainContext = ({ children }) => {
     createUserWithEmail,
     signInWithEmail,
     signInWithGooglePopUp,
+    feedType,
+    setFeedType,
   };
   return (
     <AuthContext.Provider value={appInfo}>

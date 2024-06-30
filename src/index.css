@@ -22,3 +22,21 @@
   color: blue;
   text-decoration: underline;
 }
+/* for fade in animation */
+.expandable {
+  min-height: 0;
+  color: white;
+  /* background-color: red; */
+}
+
+.wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  background-color: magenta;
+  transition: grid-template-rows 5000ms ease-in;
+  transition-delay: 3000ms;
+}
+.wrapper.open {
+  grid-template-rows: 1fr;
+}
