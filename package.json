@@ -19,7 +19,6 @@
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-hot-toast": "^2.4.1",
-    "react-html-parser": "^2.0.2",
     "react-icons": "^4.9.0",
     "react-linkify": "^1.0.0-alpha",
     "react-router-dom": "^6.12.1",
